@@ -20,7 +20,7 @@ export const setStartFeeds = async (rss) => {
     })
 
     if (!feed) {
-      feed = await Feed.create({ title: item.title, link: item.link, setEmail: true })
+      feed = await Feed.create({ title: item.title, link: item.link, setEmail: false })
       logger.info({ message: "feed created", title: item.title, link: item.link })
     }
   }
@@ -38,7 +38,7 @@ export const checkAndCreateFeeds = async (rss) => {
     })
 
     if (!feed) {
-      feed = await Feed.create({ title: item.title, link: item.link, setEmail: false })
+      feed = await Feed.create({ title: item.title, link: item.link, setEmail: true })
 
       logger.info({ message: "feed created", title: item.title, link: item.link })
     }
