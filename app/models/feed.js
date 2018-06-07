@@ -28,9 +28,12 @@ schema.hook('beforeSave', async function(feed, options) {
   if (feed.sendEmail) {
     const { link, title } = feed
 
-    await sendEmailMailgun({ link, title, email: settings.email_to })
-
-    logger.info({ message: "send email", link, title, email: settings.email_to })
+    if (settings.isEnvProd) {
+      await sendEmailMailgun({ link, title, email: settings.email_to })
+      logger.info({ message: "send email", link, title, email: settings.email_to })
+    } else {
+      logger.info("SEND EMAIL ACTION")
+    }
   }
 })
 

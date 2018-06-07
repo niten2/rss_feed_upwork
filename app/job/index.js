@@ -18,4 +18,4 @@ const main = async () => {
   }
 }
 
-schedule.scheduleJob(getRuleEveryMinute(), async () => { await main() })
+schedule.scheduleJob(getRuleEveryMinute(), main)
