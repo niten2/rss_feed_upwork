@@ -20,7 +20,7 @@ xdescribe('vkPersonsQueue', () => {
   //   await vkPersonsQueue.handlers.__default__(options)
   // })
 
-  // it("should update vkPerson", async () => {
+  it("should update vkPerson", async () => {
   //   vkPerson = await VkPerson.findById(vkPerson.id)
 
   //   const attrs = {
@@ -30,6 +30,6 @@ xdescribe('vkPersonsQueue', () => {
   //   }
 
   //   expect(vkPerson).toEqual(expect.objectContaining(attrs))
-  // })
+  })
 
 })
