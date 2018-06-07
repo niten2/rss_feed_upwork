@@ -1,5 +1,5 @@
-import settings from "config/settings"
 import Parser from "rss-parser"
+import settings from "config/settings"
 import logger from "app/services/logger"
 import { Feed } from "app/models"
 
@@ -12,17 +12,18 @@ export const getRss = async () => {
 
 export const setStartFeeds = async (rss) => {
   const createFeed = async (item) => {
-    let feed = await Feed.findOne({
+    const feed = await Feed.findOne({
       where: {
         title: item.title,
-        link: item.link
+        link: item.link,
       }
     })
 
-    if (!feed) {
-      feed = await Feed.create({ title: item.title, link: item.link, setEmail: false })
-      logger.info({ message: "feed created", title: item.title, link: item.link })
-    }
+    if (feed) return
+
+    await Feed.create({ title: item.title, link: item.link, sendEmail: false })
+
+    logger.info({ message: "feed created", title: item.title, link: item.link })
   }
 
   await Promise.all(rss.map(createFeed))
@@ -30,18 +31,18 @@ export const setStartFeeds = async (rss) => {
 
 export const checkAndCreateFeeds = async (rss) => {
   const createFeed = async (item) => {
-    let feed = await Feed.findOne({
+    const feed = await Feed.findOne({
       where: {
         title: item.title,
-        link: item.link
+        link: item.link,
       }
     })
 
-    if (!feed) {
-      feed = await Feed.create({ title: item.title, link: item.link, setEmail: true })
+    if (feed) return
 
-      logger.info({ message: "feed created", title: item.title, link: item.link })
-    }
+    await Feed.create({ title: item.title, link: item.link, sendEmail: true })
+
+    logger.info({ message: "feed created", title: item.title, link: item.link })
   }
 
   await Promise.all(rss.map(createFeed))
