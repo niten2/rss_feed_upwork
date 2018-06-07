@@ -9,6 +9,5 @@ services:
       dockerfile: Dockerfile.production
     image: rss_feed_app_1
     command: bash -c "npm run job:production"
-    env_file: ./.env
     volumes:
       - ./:/app

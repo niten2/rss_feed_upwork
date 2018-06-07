@@ -11,8 +11,6 @@ const getRuleEveryMinute = () => {
 const main = async () => {
   try {
     await checkAndCreateFeeds(await getRss())
-
-    logger.info("finish checkAndCreateFeeds")
   } catch (err) {
     logger.error(err)
   }

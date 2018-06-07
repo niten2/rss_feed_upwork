@@ -9,12 +9,13 @@ export const sendEmailMailgun = async ({ email, link, title }) => {
     to: email,
     subject: `UPWORK ${title}`,
     html: `
-      Hello,
       <br>
-      ${title}
+      <br>
       <br>
       <a href=${link}>
-        Click here
+        <strong>
+          ${title}
+        </strong>
       </a>
     `
   }

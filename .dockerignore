@@ -1,0 +1,3 @@
+database.*.sqlite
+database.dev.sqlite
+database.production.sqlite
