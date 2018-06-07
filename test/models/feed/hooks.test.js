@@ -9,11 +9,11 @@ describe("beforeSave", () => {
       const jestFn = jest.fn()
 
       beforeEach(async () => {
-        sendEmail.default = jestFn
+        sendEmail.sendEmailMailgun = jestFn
       })
 
       it("should sendEmail", async () => {
-        let feed = await factory.create('feed', { sendEmail: false })
+        let feed = await factory.create('feed', { sendEmail: true })
 
         const res = jestFn.mock.calls[0][0]
 
@@ -34,7 +34,7 @@ describe("beforeSave", () => {
       })
 
       it("should sendEmail", async () => {
-        let feed = await factory.create('feed', { sendEmail: true })
+        let feed = await factory.create('feed', { sendEmail: false })
 
         const res = jestFn.mock.calls
 
