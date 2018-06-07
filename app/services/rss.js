@@ -12,11 +12,16 @@ export const getRss = async () => {
 
 export const setStartFeeds = async (rss) => {
   const createFeed = async (item) => {
-    let feed = await Feed.findOne({ name: item.title })
+    let feed = await Feed.findOne({
+      where: {
+        title: item.title,
+        link: item.link
+      }
+    })
 
     if (!feed) {
-      feed = await Feed.create({ name: item.title, link: item.link, setEmail: true })
-      logger.info({ message: "feed created", name: item.title, link: item.link })
+      feed = await Feed.create({ title: item.title, link: item.link, setEmail: true })
+      logger.info({ message: "feed created", title: item.title, link: item.link })
     }
   }
 
@@ -25,11 +30,17 @@ export const setStartFeeds = async (rss) => {
 
 export const checkAndCreateFeeds = async (rss) => {
   const createFeed = async (item) => {
-    let feed = await Feed.findOne({ name: item.title })
+    let feed = await Feed.findOne({
+      where: {
+        title: item.title,
+        link: item.link
+      }
+    })
 
     if (!feed) {
-      feed = await Feed.create({ name: item.title, link: item.link, setEmail: false })
-      logger.info({ message: "feed created", name: item.title, link: item.link })
+      feed = await Feed.create({ title: item.title, link: item.link, setEmail: false })
+
+      logger.info({ message: "feed created", title: item.title, link: item.link })
     }
   }
 

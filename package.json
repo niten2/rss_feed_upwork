@@ -22,7 +22,9 @@
     "job": "NODE_ENV=development babel-node app/job/index.js | ./node_modules/.bin/bunyan -o short -l trace",
     "job:production": "NODE_ENV=production babel-node app/job/index.js | ./node_modules/.bin/bunyan -o short -l trace",
     "script:set_start_feed": "NODE_ENV=development babel-node app/scripts/set_start_feed.js | ./node_modules/.bin/bunyan -o short -l trace",
-    "script:set_start_feed:production": "NODE_ENV=production babel-node app/scripts/set_start_feed.js | ./node_modules/.bin/bunyan -o short -l trace"
+    "script:set_start_feed:production": "NODE_ENV=production babel-node app/scripts/set_start_feed.js | ./node_modules/.bin/bunyan -o short -l trace",
+    "log": "cat log/development.log | ./node_modules/.bin/bunyan -o short -l trace",
+    "log:prod": "cat log/production.log | ./node_modules/.bin/bunyan -o short -l trace"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",

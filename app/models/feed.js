@@ -5,7 +5,7 @@ import { sendEmailMailgun } from 'app/services/email'
 import logger from 'app/services/logger'
 
 const schema = Sequelize.define('feeds', {
-  name: {
+  title: {
     type: DataType.STRING,
     allowNull: false
   },
@@ -26,9 +26,11 @@ const schema = Sequelize.define('feeds', {
 
 schema.hook('beforeSave', async function(feed, options) {
   if (feed.sendEmail) {
-    const { link, name } = feed
-    await sendEmailMailgun({ link, name, email: settings.email_to })
-    logger.info({ message: "send email", link, name, email: settings.email_to })
+    const { link, title } = feed
+
+    await sendEmailMailgun({ link, title, email: settings.email_to })
+
+    logger.info({ message: "send email", link, title, email: settings.email_to })
   }
 })
 

@@ -9,7 +9,7 @@ module.exports = {
           allowNull: false
         },
 
-        name: {
+        title: {
           type: DataType.STRING,
           allowNull: false
         },

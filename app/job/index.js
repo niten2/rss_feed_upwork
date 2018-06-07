@@ -10,7 +10,8 @@ const run = async () => {
   try {
     const rss = await getRss()
     await checkAndCreateFeeds(rss)
-    logger.info("finish setStartFeeds")
+
+    logger.info("finish checkAndCreateFeeds")
   } catch (err) {
     logger.error(err)
   }

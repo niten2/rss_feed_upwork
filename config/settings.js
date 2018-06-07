@@ -30,6 +30,7 @@ export default {
   name: process.env.APP_NAME || "rss_upwork",
   env: process.env.NODE_ENV,
   isEnvTest: process.env.NODE_ENV == "test",
+  isEnvProd: process.env.NODE_ENV == "production",
 
   databaseUrl: process.env.DATABASE_URL,
 
