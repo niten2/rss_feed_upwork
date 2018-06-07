@@ -1,0 +1,16 @@
+version: '3'
+services:
+
+  rss_feed:
+    tty: true
+    container_name: rss_feed_app
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    image: rss_feed_app
+    ports:
+      - 3001:3001
+    command: bash -c "npm run job"
+    env_file: ./.env
+    volumes:
+      - ./:/app

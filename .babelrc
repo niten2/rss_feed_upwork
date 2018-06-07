@@ -1,0 +1,11 @@
+{
+  "presets": [
+    "env",
+    "stage-3"
+  ],
+  "plugins": [
+    ["babel-polyfill"],
+    ["resolver", {"resolveDirs": ["./"]}]
+  ]
+}
+
