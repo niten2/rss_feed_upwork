@@ -1,7 +1,7 @@
 import DataType from 'sequelize'
 import Sequelize from 'db/sequelize'
 
-const Feed = Sequelize.define('feeds', {
+const schema = Sequelize.define('feeds', {
   name: DataType.STRING,
   link: DataType.STRING,
 
@@ -19,4 +19,4 @@ schema.hook('beforeSave', async function(feed, options) {
 })
 
 
-export default Feed
+export default schema

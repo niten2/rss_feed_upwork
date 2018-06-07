@@ -1,4 +1,4 @@
-import { User } from 'app/models'
+// import { User } from 'app/models'
 
 xdescribe('#coundTodayFriend', () => {
   it("should return one", async () => {

@@ -15,6 +15,7 @@ tmp
 
 public/css/main.css
 .env
+.env.production
 node_modules
 bower_components
 .idea
