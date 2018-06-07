@@ -27,3 +27,5 @@ dist/**/*
 etc/**
 etc/mongo
 etc/**
+
+database.*.sqlite

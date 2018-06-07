@@ -1,26 +1,17 @@
-import schedule from 'node-schedule'
+import schedule from "node-schedule"
+import { getRss, checkAndCreateFeeds } from "app/services/rss"
 
+// NOTE rule - every minute
 let rule = new schedule.RecurrenceRule()
 rule.minute = new schedule.Range(0, 59, 1)
 schedule.scheduleJob(rule, async () => { await run() })
 
 const run = async () => {
-
-  const rss = await getRss()
-
-  const checkAndCreateFeed = (item) => {
-    try {
-      let feed = await Feed.findOne({ name: item.name })
-
-      if (!feed) {
-        await Feed.create({ name: item.name, link: item.link })
-      }
-
-    } catch (err) {
-      logger.info(err)
-    }
+  try {
+    const rss = await getRss()
+    await checkAndCreateFeeds(rss)
+    logger.info("finish setStartFeeds")
+  } catch (err) {
+    logger.error(err)
   }
-
-  rss.map(checkAndCreateFeed)
-
 }

@@ -1,6 +1,8 @@
 import factory from "test/factory"
 import matchers from "test/support/matchers"
 import { dropDb } from 'db/sequelize'
+import sinon from 'sinon'
+// import * as Mailgun from "mailgun-js"
 // import express from 'express'
 // import execGraphql from "test/support/exec_grapql"
 // import { initApp } from "config/app"
@@ -21,4 +23,23 @@ jest.setTimeout(10000)
 // })
 
 // beforeAll(async () => { await initApp(app) })
+
+// const mockMailgun = () => {
+//   messages: () => {
+//     return {
+//       send: sinon.spy()
+//     }
+//   }
+// }
+
+
+// beforeAll(async () => {
+//   // console.log(11111)
+//   // sinon.stub(Mailgun, "default").returns(mockMailgun)
+//   // sinon.stub(Mailgun, 'default').returns(sinon.spy())
+
+//   Mailgun.default = jest.fn()
+// })
+
+
 afterEach(async () => { await dropDb() })
