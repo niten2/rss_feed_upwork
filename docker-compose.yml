@@ -6,11 +6,9 @@ services:
     container_name: rss_feed_app
     build:
       context: .
-      dockerfile: Dockerfile.development
-    image: rss_feed_app
-    ports:
-      - 3001:3001
-    command: bash -c "npm run job"
+      dockerfile: Dockerfile.production
+    image: rss_feed_app_1
+    command: bash -c "npm run job:production"
     env_file: ./.env
     volumes:
       - ./:/app
