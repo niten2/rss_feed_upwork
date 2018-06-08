@@ -1,23 +1,13 @@
 import settings from "config/settings"
 import mailgun from "config/mailgun"
+import { buildHtml } from "app/services/utils"
 
-export const sendEmailMailgun = async ({ email, link, title }) => {
-  if (!email || !link, !title) throw new Error("Email should be exist")
-
+export const sendEmailMailgun = async (html) => {
   const data = {
     from: 'rss feed upwork <me@samples.mailgun.org>',
-    to: email,
-    subject: `UPWORK ${title}`,
-    html: `
-      <br>
-      <br>
-      <br>
-      <a href=${link}>
-        <strong>
-          ${title}
-        </strong>
-      </a>
-    `
+    to: settings.email_to,
+    subject: `UPWORK`,
+    html,
   }
 
   return await mailgun.messages().send(data)

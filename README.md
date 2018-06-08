@@ -6,11 +6,10 @@ sending letters to your email if new jobs appear in the upwork feed
 # Setup
 
   - cp .env.sample .env.production
-  - add env
+  - add your env
   - docker-compose up
 
 # Commands
 
-  - docker-compose up
   - npm run script:set_start_feed:production
   - npm run job:production

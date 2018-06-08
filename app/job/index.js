@@ -1,6 +1,6 @@
 import schedule from "node-schedule"
 import logger from "app/services/logger"
-import { getRss, checkAndCreateFeeds } from "app/services/rss"
+import { feedJob } from "app/services/rss"
 
 const getRuleEveryMinute = () => {
   let rule = new schedule.RecurrenceRule()
@@ -10,7 +10,7 @@ const getRuleEveryMinute = () => {
 
 const main = async () => {
   try {
-    await checkAndCreateFeeds(await getRss())
+    await feedJob()
   } catch (err) {
     logger.error(err)
   }
