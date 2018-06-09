@@ -16,28 +16,27 @@ describe('setStartFeeds', () => {
 
     const res = buildHtml(data)
 
-    // console.log(res)
+    expect(res).toEqual(
+      expect.stringContaining(
+        `
+        <a href=link1>
+          <strong>
+            title1
+          </strong>
+        </a>
+      `)
+    )
 
-    // expect(res).toContainEqual(`
-
-    //     <br>
-    //       <a href=link1>
-    //         <strong>
-    //           title1
-    //         </strong>
-    //       </a>
-    //     <br>
-
-    //     <br>
-    //       <a href=link2>
-    //         <strong>
-    //           title2
-    //         </strong>
-    //       </a>
-    //     <br>
-
-
-    // `)
+    expect(res).toEqual(
+      expect.stringContaining(
+        `
+        <a href=link2>
+          <strong>
+            title2
+          </strong>
+        </a>
+      `)
+    )
 
   })
 

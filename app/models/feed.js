@@ -1,8 +1,7 @@
-import DataType from 'sequelize'
-import Sequelize from 'db/sequelize'
-import settings from "config/settings"
-import { sendEmailMailgun } from 'app/services/email'
-import logger from 'app/services/logger'
+import { append } from "ramda"
+import DataType from "sequelize"
+import Sequelize from "db/sequelize"
+import logger from "app/services/logger"
 
 const schema = Sequelize.define('feeds', {
   title: {
@@ -24,17 +23,34 @@ const schema = Sequelize.define('feeds', {
 
 })
 
-// schema.hook('beforeSave', async function(feed, options) {
-//   if (feed.sendEmail) {
-//     const { link, title } = feed
+schema.setSendEmails = async function(feeds) {
+  await Promise.all(
+    feeds.map(async (feed) => {
+      feed.set({ sendEmail: true })
+      await feed.save()
+    })
+  )
+}
 
-//     if (settings.isEnvProd) {
-//       await sendEmailMailgun({ link, title, email: settings.email_to })
-//       logger.info({ message: "send email", link, title, email: settings.email_to })
-//     } else {
-//       logger.info("SEND EMAIL ACTION")
-//     }
-//   }
-// })
+schema.createNewFeeds = async function(rss) {
+  const newFeeds = async (acc, item) => {
+    let feed = await this.findOne({
+      where: {
+        title: item.title,
+        link: item.link,
+      }
+    })
+
+    if (feed) return acc
+
+    feed = await this.create({ title: item.title, link: item.link, sendEmail: true })
+
+    logger.info({ message: "feed created", title: item.title, link: item.link })
+
+    return append(feed, acc)
+  }
+
+  return await rss.reduce(newFeeds, [])
+}
 
 export default schema

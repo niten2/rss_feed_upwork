@@ -3,7 +3,7 @@ import { factory } from "factory-girl"
 import { Feed } from "app/models"
 
 factory.define('feed', Feed, {
-  name: faker.name.findName,
+  title: faker.name.findName,
   link: faker.internet.email,
 })
 

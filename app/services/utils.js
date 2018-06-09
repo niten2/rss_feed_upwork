@@ -14,24 +14,3 @@ export const buildHtml = (data) => {
     `
   }, "")
 }
-
-// export const createNewFeed = async (rss) => {
-//   const newFeeds = (item) => {
-//     let feed = await Feed.findOne({
-//       where: {
-//         title: item.title,
-//         link: item.link,
-//       }
-//     })
-
-//     if (feed) next
-
-//     feed = await Feed.create({ title: item.title, link: item.link, sendEmail: true })
-
-//     logger.info({ message: "feed created", title: item.title, link: item.link })
-
-//     return feed
-//   }
-
-//   return await Promise.all(rss.map(newFeeds))
-// }
