@@ -17,6 +17,7 @@ export const runJob = async () => {
 export const runJobWithErrorLog = async () => {
   try {
     await runJob()
+    console.log("finish check rss")
   } catch (err) {
     logger.error(err)
   }
