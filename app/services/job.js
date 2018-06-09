@@ -1,3 +1,4 @@
+import { isEmpty } from "ramda"
 import logger from "app/services/logger"
 import { Feed } from "app/models"
 import { sendEmailMailgun } from "app/services/email"
@@ -7,8 +8,9 @@ export const runJob = async () => {
   const rss = await getRss()
   const feeds = await Feed.createNewFeeds(rss)
 
-  await sendEmailMailgun(feeds)
+  if (isEmpty(feeds)) return
 
+  await sendEmailMailgun(feeds)
   await Feed.setSendEmails(feeds)
 }
 

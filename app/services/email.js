@@ -13,8 +13,6 @@ export const sendEmailMailgun = async (feeds) => {
     html,
   }
 
-  console.log(options)
-
   if (settings.isEnvProd) {
     await mailgun.messages().send(options)
     logger.info("send email", options)
