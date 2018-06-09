@@ -6,16 +6,18 @@ import { buildHtml } from "app/services/utils"
 export const sendEmailMailgun = async (feeds) => {
   const html = buildHtml(feeds)
 
-  const data = {
+  const options = {
     from: 'rss feed upwork <me@samples.mailgun.org>',
     to: settings.email_to,
     subject: `UPWORK`,
     html,
   }
 
+  console.log(options)
+
   if (settings.isEnvProd) {
-    await mailgun.messages().send(data)
-    logger.info("send email", data)
+    await mailgun.messages().send(options)
+    logger.info("send email", options)
   } else {
     logger.info("send email action")
   }
