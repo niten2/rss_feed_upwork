@@ -1,13 +1,16 @@
 import logger from "app/services/logger"
-import { getRss, setStartFeeds } from "app/services/rss"
+import { Feed } from "app/models"
+import { getRss } from "app/services/rss"
 
 const main = async () => {
   try {
     const rss = await getRss()
 
-    await setStartFeeds(rss)
+    const feeds = await Feed.createNewFeeds(rss)
 
-    logger.info("finish setStartFeeds")
+    await Feed.setSendEmails(feeds)
+
+    logger.info("finish setup old feed")
   } catch (err) {
     logger.error(err)
   }
