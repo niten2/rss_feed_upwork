@@ -1,7 +1,6 @@
 # Rss feed upwork
----
 
-sending letters to your email if new jobs appear in the upwork feed
+Sending letters to your email if new jobs appear in the upwork feed
 
 # Setup
 
