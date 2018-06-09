@@ -10,6 +10,7 @@
     "node"
   ],
   "scripts": {
+    "start": "NODE_ENV=production babel-node app/job/index.js | ./node_modules/.bin/bunyan -o short -l trace",
     "tests": "jest --forceExit --runInBand",
     "test": "jest --watch --runInBand",
     "db:migrate": "node_modules/.bin/sequelize db:migrate && NODE_ENV=test node_modules/.bin/sequelize db:migrate && NODE_ENV=production node_modules/.bin/sequelize db:migrate",
