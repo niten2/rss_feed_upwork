@@ -1,34 +1,24 @@
 import settings from "config/settings"
 import mailgun from "config/mailgun"
+import logger from "app/services/logger"
+import { buildHtml } from "app/services/utils"
 
-export const sendEmailMailgun = async ({ email, link, name }) => {
-  if (!email || !link) {
-    throw new Error("Email should be exist")
+export const sendEmailMailgun = async (feeds) => {
+  const html = buildHtml(feeds)
+
+  const data = {
+    from: 'rss feed upwork <me@samples.mailgun.org>',
+    to: settings.email_to,
+    subject: `UPWORK`,
+    html,
   }
 
-  // const user = await User.findOne({ "email": email })
-
-  // if (!user) {
-  //   throw new Error("User by email not found")
-  // }
-
-  // let link = `${settings.confirm_email_url}?code=${user.cofirmCode}`
-
-  var data = {
-    from: 'Excited User <me@samples.mailgun.org>',
-    to: email,
-    subject: `UPWORK ${name}`,
-    html: `
-      Hello,
-      <br>
-      ${name}
-      <br>
-      <a href=${link}>
-        Click here
-      </a>
-    `
+  if (settings.isEnvProd) {
+    await mailgun.messages().send(data)
+    logger.info("send email", data)
+  } else {
+    logger.info("send email action")
   }
 
-  return await mailgun.messages().send(data)
+  return feeds
 }
-

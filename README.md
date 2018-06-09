@@ -1,7 +1,15 @@
-# RSS feed
+# Rss feed upwork
 ---
 
-send email if add new work on upwork in backgroud work
+sending letters to your email if new jobs appear in the upwork feed
 
 # Setup
+
+  - cp .env.sample .env.production
+  - add your env
   - docker-compose up
+
+# Commands
+
+  - npm run script:set_start_feed:production
+  - npm run job:production

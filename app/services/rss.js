@@ -1,28 +1,10 @@
-import settings from "config/settings"
 import Parser from "rss-parser"
+import settings from "config/settings"
+import { Feed } from "app/models"
 
-export default getRss = () => {
-
+export const getRss = async () => {
   let parser = new Parser()
   let feed = await parser.parseURL(settings.rss_upwork)
 
-  return feed
-  // console.log(feed.title)
-
-  // feed.items.forEach(item => {
-
-
-  //   console.log(item.title + ':' + item.link)
-  // });
-
-
-
-
+  return feed.items
 }
-
-
-
-// (async () => {
-
-// })();
-

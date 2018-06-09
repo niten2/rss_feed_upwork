@@ -1,9 +1,9 @@
 import Sequelize, { Op } from "sequelize"
 import settings from "config/settings"
-import { User, Setting, VkPerson } from "app/models"
+import { Feed } from "app/models"
 
 const buildLogging = () => {
-  if (settings.isEnvTest) {
+  if (settings.isEnvTest || settings.isEnvProd) {
     return false
   }
 
@@ -23,9 +23,7 @@ const sequelize = new Sequelize(settings.databaseUrl, {
 export const sync = (...args) => sequelize.sync(...args)
 
 export const dropDb = async () => {
-  await User.destroy({ where: {}, truncate: true })
-  await Setting.destroy({ where: {}, truncate: true })
-  await VkPerson.destroy({ where: {}, truncate: true })
+  await Feed.destroy({ where: {}, truncate: true })
 }
 
 export default sequelize

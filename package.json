@@ -10,8 +10,7 @@
     "node"
   ],
   "scripts": {
-    "start": "NODE_ENV=production babel-node ./tools/run.js | ./node_modules/.bin/bunyan -o short -l trace",
-    "dev": "node_modules/.bin/nodemon --exec babel-node ./tools/run.js | ./node_modules/.bin/bunyan -o short -l trace",
+    "start": "NODE_ENV=production babel-node app/job/index.js | ./node_modules/.bin/bunyan -o short -l trace",
     "tests": "jest --forceExit --runInBand",
     "test": "jest --watch --runInBand",
     "db:migrate": "node_modules/.bin/sequelize db:migrate && NODE_ENV=test node_modules/.bin/sequelize db:migrate && NODE_ENV=production node_modules/.bin/sequelize db:migrate",
@@ -21,7 +20,12 @@
     "db:drop:test": "rm -rf db/database.test.sqlite",
     "db:reset": "npm run db:drop; npm run db:migrate; npm run db:seed;",
     "db:reset:test": "npm run db:drop:test; npm run db:migrate:test",
-    "job": "NODE_ENV=development.job babel-node ./job/index.js | ./node_modules/.bin/bunyan -o short -l trace"
+    "job": "NODE_ENV=development babel-node app/job/index.js | ./node_modules/.bin/bunyan -o short -l trace",
+    "job:production": "NODE_ENV=production babel-node app/job/index.js | ./node_modules/.bin/bunyan -o short -l trace",
+    "script:set_start_feed": "NODE_ENV=development babel-node app/scripts/set_start_feed.js | ./node_modules/.bin/bunyan -o short -l trace",
+    "script:set_start_feed:production": "NODE_ENV=production babel-node app/scripts/set_start_feed.js | ./node_modules/.bin/bunyan -o short -l trace",
+    "log": "cat log/development.log | ./node_modules/.bin/bunyan -o short -l trace",
+    "log:prod": "cat log/production.log | ./node_modules/.bin/bunyan -o short -l trace"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -29,38 +33,20 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-3": "^6.24.1",
-    "babel-register": "^6.26.0",
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "~1.18.2",
-    "bull": "^3.4.2",
     "bunyan": "^1.8.12",
-    "cors": "^2.8.4",
-    "dotenv": "^5.0.1",
-    "express": "^4.16.3",
-    "jsonwebtoken": "^8.2.1",
+    "dotenv": "^6.0.0",
     "mailgun-js": "^0.18.0",
-    "moment": "^2.22.1",
     "node-schedule": "^1.3.0",
-    "papaparse": "^4.4.0",
     "ramda": "^0.25.0",
     "rss-parser": "^3.1.3",
     "sequelize": "^4.37.7",
     "sequelize-cli": "^4.0.0",
-    "sqlite": "^2.9.1",
-    "subscriptions-transport-ws": "^0.9.9",
-    "vk-io": "^4.0.0-beta.6"
+    "sqlite": "^2.9.1"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "factory": "^1.0.3",
     "factory-girl": "^5.0.2",
     "faker": "^4.1.0",
-    "fetch-mock": "^6.3.0",
-    "jest": "^22.4.3",
-    "mocha": "^5.1.1",
-    "nock": "^9.2.5",
-    "nodemon": "1.5.0",
-    "sinon": "^5.0.10",
-    "supertest": "^3.0.0"
+    "jest": "^23.1.0",
+    "nodemon": "1.5.0"
   }
 }
