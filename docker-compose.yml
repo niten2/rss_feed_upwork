@@ -11,4 +11,5 @@ services:
     command: bash -c "npm run start"
     volumes:
       - ./log/:/app/log/
+      - ./.env.production:/app/.env.production
       - ./database.production.sqlite:/app/database.production.sqlite
