@@ -8,7 +8,7 @@ services:
       context: .
       dockerfile: Dockerfile.production
     image: rss_feed_app_1
-    command: bash -c "npm run job:production"
+    command: bash -c "npm run start"
     volumes:
       - ./log/:/app/log/
       - ./database.production.sqlite:/app/database.production.sqlite
