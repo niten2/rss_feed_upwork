@@ -8,7 +8,7 @@ Sending letters to your email if new jobs appear in the upwork feed
   - add your .env.production
 
   - npm run db:migrate
-  - npm run script:set_start_feed:production
-  - npm run job:production
+  - npm run setup
+  - npm run start
 
   - docker-compose up

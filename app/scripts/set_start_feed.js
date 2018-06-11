@@ -11,6 +11,7 @@ const main = async () => {
     await Feed.setSendEmails(feeds)
 
     logger.info("finish setup old feed")
+    process.exit()
   } catch (err) {
     logger.error(err)
   }
